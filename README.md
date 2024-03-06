@@ -72,3 +72,62 @@ LPVOID lpvReserved); //Reserved parameter, usually set to NULL.
 ### .exe
 - Contains normal code + necessary instructions and resources to launch on its own
 - It contains the **entry point - the main function** which is required for the program to launch
+
+
+# Creating a .dll 
+
+**Source Code**
+```
+#include <windows.h>
+
+// Define the export macro for portability
+#ifdef _WIN32
+#define DLL_EXPORT __declspec(dllexport)
+#else
+#error "This code is currently only supported for Windows systems."
+#endif
+
+// Function to add two numbers
+DLL_EXPORT int Add(int a, int b) {
+    return a + b;
+}
+
+// Optional DllMain function
+BOOL WINAPI DllMain(HINSTANCE hinstDLL, DWORD fdwReason, LPVOID lpvReserved) {
+    switch (fdwReason) {
+        case DLL_PROCESS_ATTACH:
+            // Perform any process-level initialization here if needed
+            break;
+        case DLL_PROCESS_DETACH:
+            // Perform any process-level cleanup here if needed
+            break;
+        case DLL_THREAD_ATTACH:
+        case DLL_THREAD_DETACH:
+            // Perform any thread-level initialization/cleanup here if needed
+            break;
+    }
+
+    return TRUE; // Indicate successful execution
+}
+
+// Add a main function for testing purposes can be removed in production
+int main() {
+    int x = 5, y = 10;
+    int result = Add(x, y);
+    std::cout << "Result: " << result << std::endl;
+    return 0;
+}
+```
+- ```#include <windows.h>```: This header is essential for Windows API functions like DllMain.
+- ```DLL_EXPORT``` marks the Add function for exporting.
+- 
+
+**Compilation**
+
+```
+cl /EHsc /Fe:add_dll.dll add_dll.cpp /link user32.lib kernel32.lib
+```
+- In your project settings, configure the output type as "DLL" and link the necessary libraries (e.g., ```kernel32.lib``` ).
+- Replace ```/EHsc``` with the appropriate exception handling model for your project.
+- Adjust the library paths (```user32.lib``` and ```kernel32.lib```) if necessary
+- 
