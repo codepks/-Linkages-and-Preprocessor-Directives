@@ -15,8 +15,8 @@ Editor <--> Pre-processor <--> Compiler <--> Linker <--> Dynamic library Loader 
 
 ### .lib
 - Contains only compiled code in form of functions, variables, etc. but doesn't include an **entry point (main function)**
-- Only meant for static linking i.e. code from .lib file is copied and integrated in .exe files
-- a .lib files can be created alognside a .dll file to be linked to a program to resolve references issue during compilation
+- Only meant for static linking i.e. code from ```.lib``` file is copied and integrated in .exe files
+- a ```.lib``` files can be created alognside a .dll file to be linked to a program to resolve references issue during compilation
 - **CREATION** : C or C++ files is compiled into .obj files and a **linker tool** links this object files resolved references like extern too. The output of linker tool is saved in form of **.lib** files
 - On **Visual Studio** one can condfigure project to create a .lib files and on **Command Line Tools** one can use ```cl(compiler)``` and ```lib(linker)``` to do the same
 
@@ -45,6 +45,29 @@ DLL_EXPORT int add(int a, int b) {
   return a + b;
 }
 ```
+
+**DLLMain**
+- It is an optional entry point to a DLL
+- When a DLL is loaded using ```LoadLibrary``` and unloads using ```FreeLibrary``` , it utilizes ```DLLMain```
+
+*Sample code*
+
+```
+BOOL WINAPI DllMain(
+
+HINSTANCE hinstDLL, //A handle to the DLL instance itself.
+
+DWORD fdwReason,   //Flag indicating reason for call
+                   //DLL_PROCESS_ATTACH: Process initialization or LoadLibrary call.
+                   //DLL_THREAD_ATTACH: Thread creation.
+                   //DLL_THREAD_DETACH: Thread termination.
+                   //DLL_PROCESS_DETACH
+
+LPVOID lpvReserved); //Reserved parameter, usually set to NULL.
+```
+
+
+
 
 ### .exe
 - Contains normal code + necessary instructions and resources to launch on its own
