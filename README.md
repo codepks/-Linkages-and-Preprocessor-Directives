@@ -16,12 +16,35 @@ Editor <--> Pre-processor <--> Compiler <--> Linker <--> Dynamic library Loader 
 ### .lib
 - Contains only compiled code in form of functions, variables, etc. but doesn't include an **entry point (main function)**
 - Only meant for static linking i.e. code from .lib file is copied and integrated in .exe files
-- a C or C++ files is compiled into .obj files and a **linker tool** links this object files resolved references like extern too. The output of linker tool is saved in form of **.lib** files
+- a .lib files can be created alognside a .dll file to be linked to a program to resolve references issue during compilation
+- **CREATION** : C or C++ files is compiled into .obj files and a **linker tool** links this object files resolved references like extern too. The output of linker tool is saved in form of **.lib** files
 - On **Visual Studio** one can condfigure project to create a .lib files and on **Command Line Tools** one can use ```cl(compiler)``` and ```lib(linker)``` to do the same
 
 
+
 ### .dll
-- 
+- Meant for dynamic loading
+- The key difference between .lib and .dll file is that .dll files have **exported functions** defined which makes them accessible and are used by other programs
+- The function export works generally using ```__declspec(dllexport)```
+- ```DLLMain``` is an entry point to dlls
+
+```
+#ifdef _WIN32
+
+// Define dllexport for Windows
+#define DLL_EXPORT __declspec(dllexport)
+
+#else
+
+// Define dllexport for other platforms (optional)
+#define DLL_EXPORT
+
+#endif
+
+DLL_EXPORT int add(int a, int b) {
+  return a + b;
+}
+```
 
 ### .exe
 - Contains normal code + necessary instructions and resources to launch on its own
