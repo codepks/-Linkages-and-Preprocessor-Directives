@@ -130,4 +130,4 @@ cl /EHsc /Fe:add_dll.dll add_dll.cpp /link user32.lib kernel32.lib
 - In your project settings, configure the output type as "DLL" and link the necessary libraries (e.g., ```kernel32.lib``` ).
 - Replace ```/EHsc``` with the appropriate exception handling model for your project.
 - Adjust the library paths (```user32.lib``` and ```kernel32.lib```) if necessary
-- 
+
