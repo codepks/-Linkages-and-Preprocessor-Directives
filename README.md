@@ -145,3 +145,17 @@ Linkers look into the aspect of internal and external linkages before linking th
 > - **Internal Linkage**  : These are visible to the _linker_ within that translation units
 > - **External Linkage**  : _Linker_ can see it when processing other translation units too
 
+## Translation Units
+
+```
+#include "header.hpp"// -> Exands to int strlen(const char* string);
+
+int strlen(const char* string)
+{
+	int length = 0;
+
+	while(string[length]) ++length;
+
+	return length + VALUE;
+}
+```
