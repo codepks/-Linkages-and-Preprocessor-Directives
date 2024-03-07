@@ -163,6 +163,8 @@ int strlen(const char* string)
 You can make your linker very angry if your symbol is declared and defined in the same file.<br>
 And if you include that file in multiple places then it will cry. (due to heavy code inclusion)
 
+### External Linkage
+
 **extern examples**
 ```
 extern int x;
@@ -173,4 +175,23 @@ extern void f(const std::string& argument);
 int x;          // is the same as
 extern int x{}; // which will both likely cause linker errors.
 extern int x;   // while this only declares the integer, which is ok.
+```
+
+**C Way**
+Using macros, they can be used across files
+```
+#define CLK 1000000
+```
+
+**C++ Way**
+Using extern variables inside namespace:
+```
+// global.hpp
+namespace Global{
+	extern unsigned int clock_rate;
+}
+// global.cpp
+namespace Global{
+	unsigned int clock_rate = 1000000;
+}
 ```
