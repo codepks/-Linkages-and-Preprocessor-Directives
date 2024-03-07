@@ -221,8 +221,16 @@ In main.cpp header.h expands to extern int x and turns into a translation unit. 
 
 **Explaination** <br>
 Here two translation units are generated:
-- One with ```header.cpp``` and included `header.h`
+- One with `header.cpp` and included `header.h`
+- One with `main.cpp` and included `header.h`
 
+In compilation process `main.cpp` expands to :
+```
+extern int x;
+int main() { std::cout << x; }
+```
+
+Now the job of the linker is the find the definition of `x` in other object files generated as x is an external linkage and finds it in one of the translation units.
 
 ### Internal Linkage
 The symbols with internal linkage are visible within same translation unit. <br>
@@ -271,5 +279,5 @@ static int variable = 0;
 **One Definition Rule**
 - You can declare something multiple times across all translation units for a particular exectuable
 - You cannot define something multiple times across all translation units for a particular executable
-- There can only be **ONE****** definition per symbol within each translation unit!
+- There can only be **ONE** definition per symbol within each translation unit!
 
