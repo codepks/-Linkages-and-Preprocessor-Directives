@@ -8,8 +8,8 @@ Editor <--> Pre-processor <--> Compiler <--> Linker <--> Dynamic library Loader 
 
 ## Compilation steps
 1. **Pre-processing** : ```#include``` , ```#define``` and other preprocessor directives. In prepocessing these are completely replaced by some form of text and forms a **completely parseable C++ file**.
-2. **Compilation** : Compiles each source file separately into assembly code and forms **object file**.
-3. **Linking** : Linker takes the object file from above and forms either a library file(.lib or .dll) or an executable file
+2. **Compilation** : Compiles **each source file** separately into assembly code and forms **object file**.
+3. **Linking** : Linker takes the object file from above and forms either a library file(.lib or .dll) or an executable file. The linking instrcutions are given in CMakeLists.txt
 
 ## .lib or .dll and .exe files
 
