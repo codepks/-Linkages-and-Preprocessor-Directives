@@ -226,3 +226,14 @@ void print_value() {
 **Explaination :**
 - In this example, value is declared as static in the header. However, each translation unit gets its own copy of value due to inclusion. This means that incrementing value in _translation_unit1_ might not affect the value printed in _translation_unit2_. <br>
 - To avoid this issue, **avoid** declaring static symbols in header files.
+
+**Make non-const variable internal linkage**
+
+Using anonymous namespaces, one can access the variable within that translation unit
+```
+namespace { int variable = 0; }
+```
+does (almost) the same thing as this:
+```
+static int variable = 0;
+```
