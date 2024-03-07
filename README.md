@@ -131,3 +131,5 @@ cl /EHsc /Fe:add_dll.dll add_dll.cpp /link user32.lib kernel32.lib
 - Replace ```/EHsc``` with the appropriate exception handling model for your project.
 - Adjust the library paths (```user32.lib``` and ```kernel32.lib```) if necessary
 
+# Linkages
+source is [here](https://www.goldsborough.me/c/c++/linker/2016/03/30/19-34-25-internal_and_external_linkage_in_c++/)
