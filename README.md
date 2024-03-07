@@ -145,7 +145,7 @@ Linkers look into the aspect of internal and external linkages before linking th
 
 ## Translation Units
 
-Below is an example :
+Header expanded in a .cpp files makes a translation unit. Below is an example :
 ```
 int strlen(const char* string); //-> Exanded from #include "header.hpp"
 
@@ -196,6 +196,34 @@ namespace Global{
 }
 ```
 
+**Linking Process**
+
+- extern declared in ```header.h```
+```
+//header.h
+extern int x;
+```
+- The definition of the extern keyword defined in ```header.cpp```
+```
+//header.cpp
+int x = 5
+```
+- main file outputs the value of x by just including ```header.h```
+```
+//main.cpp
+#include "header.h"
+int main(){
+	std::cout << x;
+}
+```
+
+In main.cpp header.h expands to extern int x and turns into a translation unit. Without including header.cpp, how does main.cpp is able to find definition of x?
+
+**Explaination** <br>
+Here two translation units are generated:
+- One with ```header.cpp``` and included `header.h`
+
+
 ### Internal Linkage
 The symbols with internal linkage are visible within same translation unit. <br>
 
@@ -240,3 +268,8 @@ does (almost) the same thing as this:
 ```
 static int variable = 0;
 ```
+**One Definition Rule**
+- You can declare something multiple times across all translation units for a particular exectuable
+- You cannot define something multiple times across all translation units for a particular executable
+- There can only be **ONE****** definition per symbol within each translation unit!
+
