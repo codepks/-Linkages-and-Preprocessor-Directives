@@ -195,3 +195,34 @@ namespace Global{
 	unsigned int clock_rate = 1000000;
 }
 ```
+
+### Internal Linkage
+The symbols with internal linkage are visible within same translation unit. <br>
+
+If you declared a internal linkage symbol in a header file, then each translation unit you include this header file in will get its own unique copy of that symbol as if you redefined each symbol in the translation unit.
+
+**Example**
+```
+// header.h
+static int value = 0; // Internal linkage symbol
+```
+```
+// translation_unit1.cpp
+#include "header.h"
+
+void increment() {
+  value++;
+}
+```
+```
+// translation_unit2.cpp
+#include "header.h"
+
+void print_value() {
+  std::cout << value << std::endl; // Might not print the expected value
+}
+```
+
+**Explaination :**
+- In this example, value is declared as static in the header. However, each translation unit gets its own copy of value due to inclusion. This means that incrementing value in _translation_unit1_ might not affect the value printed in _translation_unit2_. <br>
+- To avoid this issue, **avoid** declaring static symbols in header files.
