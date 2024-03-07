@@ -231,7 +231,10 @@ void print_value() {
 
 Using anonymous namespaces, one can access the variable within that translation unit
 ```
-namespace { int variable = 0; }
+namespace {
+int variable = 0;
+int cannotAccessOutsideThisFile() { ... };
+}
 ```
 does (almost) the same thing as this:
 ```
