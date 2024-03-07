@@ -132,3 +132,15 @@ cl /EHsc /Fe:add_dll.dll add_dll.cpp /link user32.lib kernel32.lib
 
 # Linkages
 source is [here](https://www.goldsborough.me/c/c++/linker/2016/03/30/19-34-25-internal_and_external_linkage_in_c++/)
+
+Linkers look into the aspect of internal and external linkages before linking the object files. Following are the keywords and their linkge behaviour:
+1) **static** : internal linkage
+2) **extern** : external linkage
+3) **non-const global variables** : external linkage
+4) **const global variables** : internal linkage
+5) **functions** : external
+
+> Explaination <br>
+> - **Translation Units** : It means all the .cpp / .c files and header files .h/.hpp files it includes
+> - **Internal Linkage**  : These are visible to the _linker_ within that translation units
+> - **External Linkage**  : _Linker_ can see it when processing other translation units too
