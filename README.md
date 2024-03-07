@@ -144,3 +144,4 @@ Linkers look into the aspect of internal and external linkages before linking th
 > - **Translation Units** : It means all the .cpp / .c files and header files .h/.hpp files it includes
 > - **Internal Linkage**  : These are visible to the _linker_ within that translation units
 > - **External Linkage**  : _Linker_ can see it when processing other translation units too
+
