@@ -65,9 +65,6 @@ DWORD fdwReason,   //Flag indicating reason for call
 LPVOID lpvReserved); //Reserved parameter, usually set to NULL.
 ```
 
-
-
-
 ### .exe
 - Contains normal code + necessary instructions and resources to launch on its own
 - It contains the **entry point - the main function** which is required for the program to launch
@@ -144,7 +141,7 @@ Linkers look into the aspect of internal and external linkages before linking th
 > Explaination <br>
 > - **Translation Units** : It means all the .cpp / .c files and header files .h/.hpp files it includes
 > - **Internal Linkage**  : These are visible to the _linker_ within that translation units
-> - **External Linkage**  : _Linker_ can see it when processing other translation units too
+> - **External Linkage**  : _Linker_ can see it when processing other translation units too. The symbols are visible among different translation units
 
 ## Translation Units
 
@@ -162,3 +159,18 @@ int strlen(const char* string)
 }
 ```
 
+## Linker
+You can make your linker very angry if your symbol is declared and defined in the same file.<br>
+And if you include that file in multiple places then it will cry. (due to heavy code inclusion)
+
+**extern examples**
+```
+extern int x;
+extern void f(const std::string& argument);
+```
+```int x``` cannot be a global variable as it comes with definition due to default constructor
+```
+int x;          // is the same as
+extern int x{}; // which will both likely cause linker errors.
+extern int x;   // while this only declares the integer, which is ok.
+```
