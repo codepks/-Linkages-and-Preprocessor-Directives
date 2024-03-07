@@ -230,7 +230,7 @@ extern int x;
 int main() { std::cout << x; }
 ```
 
-Now the job of the linker is the find the definition of `x` in other object files generated as x is an external linkage and finds it in one of the translation units.
+Now the job of the linker is the find the definition of `x` in other object files generated as x is an external linkage and finds it in one of the translation units. <br> Similar behaviour is observed with functions are by default external linkage.
 
 ### Internal Linkage
 The symbols with internal linkage are visible within same translation unit. <br>
