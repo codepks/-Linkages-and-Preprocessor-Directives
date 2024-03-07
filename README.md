@@ -132,7 +132,8 @@ cl /EHsc /Fe:add_dll.dll add_dll.cpp /link user32.lib kernel32.lib
 
 # Linkages
 source is [here](https://www.goldsborough.me/c/c++/linker/2016/03/30/19-34-25-internal_and_external_linkage_in_c++/)
-
+<br>
+Linkages are basically visibility of symbols/variables/functions to the linkers in a translation unit
 Linkers look into the aspect of internal and external linkages before linking the object files. Following are the keywords and their linkge behaviour:
 1) **static** : internal linkage
 2) **extern** : external linkage
@@ -147,8 +148,9 @@ Linkers look into the aspect of internal and external linkages before linking th
 
 ## Translation Units
 
+Below is an example :
 ```
-#include "header.hpp"// -> Exands to int strlen(const char* string);
+int strlen(const char* string); //-> Exanded from #include "header.hpp"
 
 int strlen(const char* string)
 {
@@ -159,3 +161,4 @@ int strlen(const char* string)
 	return length + VALUE;
 }
 ```
+
