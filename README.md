@@ -291,3 +291,21 @@ source is [here](https://www.math.utah.edu/docs/info/cpp_1.html)
 **Steps of building an executable**
 Preprocessor (Include Header, Expand Macro) <--> Compiler (Assembly Code) <--> Assembler (Machine Code)<-->  Linker <--> .exe file
 
+## Comments
+Should be always like this `/* like this one */`
+
+## newline character
+```
+int someFun\
+ction()\
+{
+	return \
+		1;
+}
+
+int main(){
+	std::cout << someFunction();
+}
+```
+
+The above code works as `\` is deleted
