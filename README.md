@@ -281,3 +281,13 @@ static int variable = 0;
 - You cannot define something multiple times across all translation units for a particular executable
 - There can only be **ONE** definition per symbol within each translation unit!
 
+# Preprocessor Directives
+
+source is [here](https://www.math.utah.edu/docs/info/cpp_1.html)
+
+- Macros make code very hard to debug
+- If you can afford to not use them then better not
+
+**Steps of building an executable**
+Preprocessor (Include Header, Expand Macro) <--> Compiler (Assembly Code) <--> Assembler (Machine Code)<-->  Linker <--> .exe file
+
