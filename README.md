@@ -554,3 +554,45 @@ int main() {
 }
 ```
 __FUNCTION__ prints the current function name
+
+### __VA_ARGS__ 
+
+- It's a variadic macro and you can call it with any number of arguments.
+- It is used along with `...` which indicates that the macro can accept zero or more additional arguments of any type (__VA_ARGS__).
+
+We are making a custom printing macro function:
+```
+#include <iostream>
+#include <string>
+
+// Variadic macro for printing messages with different types
+#define PRINT_VARARGS(message, ...)  \
+  do {                               \
+    std::cout << message << " : ";   \
+    print_arguments(__VA_ARGS__);    \
+  } while (0)
+
+// Helper function to print individual arguments
+void print_arguments() {}
+
+// Function template to handle arguments of different types
+template <typename T>
+void print_arguments(T arg) {
+  std::cout << arg << std::endl;
+}
+
+// Function template overload to handle multiple arguments
+template <typename T, typename... Args>
+void print_arguments(T first, Args... rest) {
+  std::cout << first << ", ";
+  print_arguments(rest...); // Recursive call to handle remaining arguments
+}
+
+int main() {
+  PRINT_VARARGS("Integer value", 42);
+  PRINT_VARARGS("Floating-point value", 3.14);
+  PRINT_VARARGS("String message", "Hello, world!");
+  PRINT_VARARGS("Multiple arguments", 10, "apple", 20.5);
+  return 0;
+}
+```
