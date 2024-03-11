@@ -538,3 +538,19 @@ int main() {
 }
 ```
 
+### __FUNCTION__
+
+```
+#include <iostream>
+#include <string>
+
+void printFunctionCall(const std::string& message) {
+  std::cout << "Function " << __FUNCTION__ << " called with message: " << message << std::endl;
+}
+
+int main() {
+  printFunctionCall("This is a message from main");
+  return 0;
+}
+```
+__FUNCTION__ prints the current function name
