@@ -428,3 +428,29 @@ int A() {
   return stored_var_A;
 }
 ```
+## Macro Prescans
+
+[source](https://github.com/methylDragon/coding-notes/blob/master/C++/08%20C++%20-%20Linkages%20and%20Preprocessor%20Directives.md#314-macro-prescans-)
+
+This understanding of macros will help you in debuggin them :
+```#define MACRO_NAME MACRO_TEXT```
+
+`MACRO_TEXT` will replace `MACRO_NAME` and withing `MACRO_NAME` it will search for an predefined macro. If it has  #s to stringify the macro, then it will stringfy it there itself **uncless you use prescan method before it**.
+
+```
+#define str(s) #s
+#define foo 4
+str (foo)
+``` 
+// Will become "foo"
+If you wanted to stringify it, you can use the prescan mechanism to do it
+```
+#define xstr(s) str(s)
+#define str(s) #s
+#define foo 4
+xstr (foo)
+```
+// Will become "4"
+
+**NOTE**: Never forget to put your macro expressions withing paranthesis.
+
