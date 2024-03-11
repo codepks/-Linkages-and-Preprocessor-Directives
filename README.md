@@ -309,3 +309,76 @@ int main(){
 ```
 
 The above code works as `\` is deleted
+
+## Macro Arguments
+
+We can make functions too for varied usage:
+
+```
+#define PRINT_THIS(X) std::cout << X; /* Definition */
+PRINT_THIS("A"); // Usage
+
+// expands to
+std::cout << "A";
+```
+
+Using it to pass another set of arguments:
+```
+#define min(X, Y)  ((X) < (Y) ? (X) : (Y)) /* Definition */
+min(1, 2); // Usage
+
+// When preprocessed, becomes
+((1) < (2) ? (1) : (2));
+
+// It supports arbitrary arguments too!
+min(x + y, foo(z));
+
+// Becomes
+// Beware with this, since foo(z) gets called twice as a result of this macro expansion
+((x + y) < (foo(z)) ? (x + y) : (foo(z)));
+```
+
+## if-elif
+
+```
+#ifdef SOME_MACRO_NAME
+// RUN THIS IS SOME_MACRO_NAME IS DEFINED
+#endif
+
+#ifndef SOME_OTHER_NAME
+// RUN THIS IF SOME_OTTHER_NAME IS NOT DEFINED
+#endif
+
+// These are equivalent to
+#if defined (SOME_MACRO_NAME)
+#endif
+
+// And
+#if ! defined (SOME_OTHER_NAME)
+#endif
+```
+
+## Errors and Warnings
+```
+//#define SOME_OTHER_CONDITION 1
+
+#if SOME_CONDITION
+#error THROW THIS ERROR MSSAGE
+#endif
+
+#if SOME_OTHER_CONDITION
+#warning THROW THIS WARNING MESSAGE
+#endif
+```
+The above case would show error in case no definition is found during the compile time itself.
+
+## Good usages
+
+```
+#define DOUBLE_VAR(n, v) int int_ ## n(v); double double_ ## n(v);
+
+int main(){
+	DOUBLE_VAR(2, 3); //becomes int int_2(3);
+	DOUBLE_VAR(b, 3); //becomes int int_b(3);
+}
+```
