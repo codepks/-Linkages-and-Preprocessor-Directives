@@ -457,6 +457,7 @@ xstr (foo)
 ## Prefdefined Macros
 [source](https://gcc.gnu.org/onlinedocs/cpp/Standard-Predefined-Macros.html)
 
+### __LINE__, __FILE__
 ```
 std::cout << "File name: " << __FILE__ << std::endl;
 File name: C:\Users\pk152268\source\repos\Macros\Macros\Macros.cpp
@@ -464,3 +465,76 @@ File name: C:\Users\pk152268\source\repos\Macros\Macros\Macros.cpp
 std::cout << "Line number: " << __LINE__ << std::endl;
 Line number: 18
 ```
+### __cplusplus
+For conditional compilation based on various C++ versions. At the compile time itself it compiles the code based on current C++ version :
+```
+
+#ifdef __cplusplus
+#  if __cplusplus == 201703L  // Check for C++17 standard
+#    define USE_C17_FEATURES
+#  elif __cplusplus == 202002L  // Check for C++20 standard
+#    define USE_C20_FEATURES
+#  else
+#    // Code for older standards (C++98, C++11, C++14)
+#  endif
+#else
+#  error "This code requires a C++ compiler."
+#endif
+
+int main() {
+#ifdef USE_C17_FEATURES
+    // Use features specific to C++17 or later, such as fold expressions
+    std::cout << std::accumulate({ 1, 2, 3, 4 }, 0, [](int x, int y) { return x + y; }) << std::endl;
+#elif defined(USE_C20_FEATURES)
+    // Use features specific to C++20 or later, such as concepts
+    // (Concepts require additional library support, not shown here)
+    std::cout << "C++20 features supported" << std::endl;
+#else
+    // Use features compatible with older standards
+    int sum = 0;
+    for (int num : {1, 2, 3, 4}) {
+        sum += num;
+    }
+    std::cout << sum << std::endl;
+#endif
+
+    return 0;
+}
+```
+
+### __DATE__, __TIME__
+```
+#include <iostream>
+#include <string>
+
+int main() {
+  std::string compile_date = __DATE__;
+  std::string compile_time = __TIME__;
+
+  std::cout << "This program was compiled on: " << compile_date << " at " << compile_time << std::endl;
+
+  return 0;
+}
+```
+
+### __STDC__, __STDC_VERSION__
+```
+#include <iostream>
+
+int main() {
+#ifdef __STDC__
+    std::cout << "This compiler conforms to an ISO C standard (at least C89)." << std::endl;
+
+#ifdef __STDC_VERSION__
+    std::cout << "Supported C standard version (if defined): " << __STDC_VERSION__ << std::endl;
+#else
+    std::cout << "C standard version details unavailable." << std::endl;
+#endif
+#else
+    std::cout << "This compiler might not fully conform to an ISO C standard." << std::endl;
+#endif
+
+    return 0;
+}
+```
+
