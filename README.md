@@ -455,6 +455,8 @@ xstr (foo)
 **NOTE**: Never forget to put your macro expressions withing paranthesis.
 
 ## Prefdefined Macros
+[source](https://gcc.gnu.org/onlinedocs/cpp/Standard-Predefined-Macros.html)
+
 ```
 std::cout << "File name: " << __FILE__ << std::endl;
 File name: C:\Users\pk152268\source\repos\Macros\Macros\Macros.cpp
