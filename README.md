@@ -374,11 +374,49 @@ The above case would show error in case no definition is found during the compil
 
 ## Good usages
 
+### Variable Expansion
 ```
 #define DOUBLE_VAR(n, v) int int_ ## n(v); double double_ ## n(v);
 
 int main(){
 	DOUBLE_VAR(2, 3); //becomes int int_2(3);
 	DOUBLE_VAR(b, 3); //becomes int int_b(3);
+}
+```
+### Function Expansion
+
+```
+#define STORE_VAR(n, v) int n(void)\
+{\
+  static stored_var_ ## n = v;\
+  return stored_var_ ## n;\
+}
+
+// Usage
+STORE_VAR(A, 5);
+A();
+
+// Becomes
+int A()
+{
+  static int stored_var_A = 5;
+  return stored_var_A;
+}
+A();
+```
+**How did into come here**
+
+```
+int A(void) {
+  static stored_var_A = 5;  // Replace ##n with A
+  return stored_var_A;
+}
+```
+is functionally equivalent too:
+
+```
+int A() {
+  static int stored_var_A = 5;
+  return stored_var_A;
 }
 ```
