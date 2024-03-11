@@ -310,6 +310,14 @@ int main(){
 
 The above code works as `\` is deleted
 
+## Macro concatenation
+```
+#define WOW(NAME, VALUE) int wow_var_ ## NAME = VALUE; /* Definition */
+WOW(A, 5) // Usage
+    
+// When preprocessed, becomes
+int wow_var_A = 5;
+```
 ## Macro Arguments
 
 We can make functions too for varied usage:
